@@ -1,5 +1,3 @@
-listx = [11, 23, 42, 423, 5, 75]
-
 class P:
     def __init__(self, mem_p, num=0):
         self.mem_p = mem_p
@@ -7,6 +5,7 @@ class P:
         self.Next_P = {num : self.mem_p[num]}
         self.num = num
         self.mem_init_n = 0
+
     def __add__(self, slice_number=0):
         i = int(self.num + slice_number)
         j =  i-(len(self.origin_file)-1) if len(self.origin_file)-1 < i else 0
@@ -15,5 +14,14 @@ class P:
         self.Next_P = {i : self.mem_p[i]}
         self.num = int([i for i, j in self.Next_P.items()][0])
 
+    def __le__(self, v):  ### a <= b
+        self.mem_p[self.num] = v
+
+listx = [11, 23, 42, 423, 5, 75]
+
 p1 = P(listx)
 print(p1.Next_P)
+p1 <= 5
+p1+7
+p1 <= 1000
+print(p1.mem_p)
