@@ -17,6 +17,8 @@ class P:
     def __le__(self, v):  ### a <= b
         self.mem_p[self.num] = v
 
+    def __sub__(self, slice_number=0):
+        pass
 listx = [11, 23, 42, 423, 5, 75]
 
 p1 = P(listx)
