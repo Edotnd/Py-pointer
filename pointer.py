@@ -18,16 +18,15 @@ class P:
         self.mem_p[self.num] = v
 
     def __sub__(self, slice_number=0):
-        self.num -= slice_number
-        self.Next_P = {self.num : self.mem_p[self.num]}
+        i = int(self.num - slice_number)
+        if i < 0:
+            self.mem_p = ['-0x'+str(-z) for z in range(i, 0)]+self.mem_p
+            self.Next_P = {0 : self.mem_p[0]}
+            self.num = 0
+        else:
+            self.num -= slice_number
+            self.Next_P = {self.num : self.mem_p[self.num]}
 
 listx = [11, 23, 42, 423, 5, 75]
 
 p1 = P(listx)
-p1+3; p1<=1000000000
-p1+7; p1 <= 1000
-print(p1.mem_p)
-print(p1.num)
-p1-7
-p1<=77
-print(p1.mem_p)
