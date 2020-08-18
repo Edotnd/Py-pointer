@@ -1,6 +1,9 @@
 class P:
+    # virtual Pointer in PYTHON
     def __init__(self, mem_p, num=0):
         self.mem_p = mem_p
+        if type(self.mem_p) != list:
+            self.mem_p = [self.mem_p]
         self.origin_file = mem_p
         self.Next_P = {num : self.mem_p[num]}
         self.num = num
@@ -26,7 +29,3 @@ class P:
         else:
             self.num -= slice_number
             self.Next_P = {self.num : self.mem_p[self.num]}
-
-listx = [11, 23, 42, 423, 5, 75]
-
-p1 = P(listx)
