@@ -4,28 +4,32 @@ class P:
         self.mem_p = mem_p
         if type(self.mem_p) != list:
             self.mem_p = [self.mem_p]
-        self.origin_file = mem_p
-        self.Next_P = {num : self.mem_p[num]}
         self.num = num
-        self.mem_init_n = 0
+        self.Next_P = {num : self.mem_p[num]}
+        self.origin_len = len(mem_p)
+        
 
     def __add__(self, slice_number=0):
         i = int(self.num + slice_number)
-        j =  i-(len(self.origin_file)-1) if len(self.origin_file)-1 < i else 0
-        self.mem_init_n += j - 1
-        self.mem_p += ['0x'+str(z) for z in range(self.mem_init_n, j+self.mem_init_n)]
-        self.Next_P = {i : self.mem_p[i]}
-        self.num = int([i for i, j in self.Next_P.items()][0])
+        if i > len(self.mem_p)-1:
+            self.mem_p += ['0x'+str(z) for z in range(len(self.mem_p)-self.origin_len, i-self.origin_len+1)]
+            self.Next_P = {len(self.mem_p)-1 : self.mem_p[-1]}
+            self.num = len(self.mem_p)-1
+        else:
+            self.num = slice_number
+            self.Next_P = {self.num : self.mem_p[self.num]}
 
     def __le__(self, v):  ### a <= b
         self.mem_p[self.num] = v
+        self.Next_P = {self.num : self.mem_p[self.num]}
 
     def __sub__(self, slice_number=0):
-        i = int(self.num - slice_number)
+        i = int(self.num - slice_number)+1
         if i < 0:
-            self.mem_p = ['-0x'+str(-z) for z in range(i, 0)]+self.mem_p
+            self.mem_p = ['-0x'+str(-z) for z in range(i, 1)]+self.mem_p
             self.Next_P = {0 : self.mem_p[0]}
             self.num = 0
         else:
             self.num -= slice_number
             self.Next_P = {self.num : self.mem_p[self.num]}
+
