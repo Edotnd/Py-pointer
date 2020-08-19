@@ -33,9 +33,9 @@ class P:
     def __sub__(self, slice_number):
         i = int(self.num - slice_number)
         self.num = i
-        if i < 0:
-            a = int(list(map(int, self.copy_mem_p[0].keys()))[0])
-            box = {a+z: '-0x'+str(-(a+z)) for z in range(i, a)}
+        a = int(list(map(int, self.copy_mem_p[0].keys()))[0])
+        if i < a:
+            box = {z: '-0x'+str(-(z)) for z in range(i, a)}
             box = [{i[0]: i[1]} for i in box.items()]
             self.copy_mem_p = box + self.copy_mem_p
             self.Next_p = self.copy_mem_p[0]
