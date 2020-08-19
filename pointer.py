@@ -23,6 +23,7 @@ class P:
             for j in self.copy_mem_p:
                 if int(list(map(int, j.keys()))[0]) == i:
                     self.Next_p = j
+        return self.Next_p
 
     def __le__(self, v): ## a <= b
         a = int(list(map(int, self.Next_p.keys()))[0])
@@ -43,3 +44,4 @@ class P:
             for j in self.copy_mem_p:
                 if int(list(map(int, j.keys()))[0]) == i:
                     self.Next_p = j
+        return self.Next_p
