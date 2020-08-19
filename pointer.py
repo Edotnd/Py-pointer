@@ -45,3 +45,11 @@ class P:
                 if int(list(map(int, j.keys()))[0]) == i:
                     self.Next_p = j
         return self.Next_p
+
+    def __gt__(self, ver): ## x>y calls x.__gt__(y)
+        x = self.copy_mem_p if ver == 'mp' else (
+            self.Next_p if ver == 'np' else (
+                self.num if ver == 'N' else 'error : '+ver
+            )
+        )
+        print(x)
