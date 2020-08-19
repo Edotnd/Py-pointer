@@ -20,9 +20,12 @@ class P:
             self.copy_mem_p += box
             self.Next_p = self.copy_mem_p[-1]
         else:
-            self.Next_p = self.copy_mem_p[i] 
+            for j in self.copy_mem_p:
+                if int(list(map(int, j.keys()))[0]) == i:
+                    self.Next_p = j
+        print(self.num, self.Next_p) 
 
-        print(self.num)
+        # print(self.num)
         
         # print(self.copy_mem_p)
         # print(self.Next_p)
@@ -30,16 +33,34 @@ class P:
     def __le__(self, v): ## a <= b
         a = int(list(map(int, self.Next_p.keys()))[0])
         for i in self.copy_mem_p:
-            if str(list(map(int, i.keys()))).find(str(a)) == 1:
+            if int(list(map(int, i.keys()))[0]) == a:
                 i[a] = v
-        print(self.copy_mem_p)
+        # print(self.copy_mem_p)
 
     def __sub__(self, slice_number):
-        pass
+        i = int(self.num - slice_number)
+        self.num = i
+        if i < 0:
+            a = int(list(map(int, self.copy_mem_p[0].keys()))[0])
+            box = {a+z: '-0x'+str(-(a+z)) for z in range(i, a)}
+            box = [{i[0]: i[1]} for i in box.items()]
+            self.copy_mem_p = box + self.copy_mem_p
+            # print(self.copy_mem_p)
+            self.Next_p = self.copy_mem_p[0]
+        else:
+            for j in self.copy_mem_p:
+                if int(list(map(int, j.keys()))[0]) == i:
+                    self.Next_p = j
+        print(self.num, self.Next_p)
+        # print(self.copy_mem_p)
+        # print(self.Next_p)
+        # print(self.num)
 
 p1 = P([1, 2, 3, 4, 33])
 p1 + 3
-p1 <= 0
-p1 + 7
-p1 <= 88
-        
+p1 <= 7
+p1 - 7
+p1 <= 8
+p1 + 6
+p1 <= 9999
+print(p1.copy_mem_p)
