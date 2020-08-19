@@ -43,4 +43,3 @@ class P:
             for j in self.copy_mem_p:
                 if int(list(map(int, j.keys()))[0]) == i:
                     self.Next_p = j
-        print(self.num, self.Next_p)
