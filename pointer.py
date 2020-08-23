@@ -50,8 +50,8 @@ class P:
         a = int(list(map(int, self.Next_p.keys()))[0])
         for i in self.copy_mem_p:
             if int(list(map(int, i.keys()))[0]) == a:
-                i[a] = '0x'+str(a) if a >= 0 else '-0x'+str(a)
-                return i[a]
+                b = i[a]; i[a] = '0x'+str(a) if a >= 0 else '-0x'+str(a)
+                return b
 
     def __gt__(self, ver): ## x>y calls x.__gt__(y)
         x = self.copy_mem_p if ver == 'mp' else (
