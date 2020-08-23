@@ -46,6 +46,13 @@ class P:
                     self.Next_p = j
         return self.Next_p
 
+    def pop(self):
+        a = int(list(map(int, self.Next_p.keys()))[0])
+        for i in self.copy_mem_p:
+            if int(list(map(int, i.keys()))[0]) == a:
+                i[a] = '0x'+str(a) if a >= 0 else '-0x'+str(a)
+                return i[a]
+
     def __gt__(self, ver): ## x>y calls x.__gt__(y)
         x = self.copy_mem_p if ver == 'mp' else (
             self.Next_p if ver == 'np' else (
